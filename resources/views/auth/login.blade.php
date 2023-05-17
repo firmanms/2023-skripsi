@@ -77,7 +77,7 @@
                         <span class="fw-normal">
                             {{ __('Not registered?') }}
                             <a href="{{ route('register') }}" class="fw-bold">{{ __('Create account') }}</a><br>
-                            <center>FMS</center>
+                            {{-- <center>FMS</center> --}}
                         </span>
                     </div>
                 </div>

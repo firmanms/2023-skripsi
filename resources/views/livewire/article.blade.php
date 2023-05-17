@@ -1,12 +1,17 @@
 <div>
     @if($updateMode)
     @include('livewire.article-update')
-@else
+@elseif($createMode)
 @can('banner-create')
     @include('livewire.article-create')
 @endcan
 @endif
 <br>
+{{-- @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif --}}
 <div class="table-responsive">
     <input type="text"  class="form-control" placeholder="Cari" wire:model="search" />
     <table class="table">
@@ -30,13 +35,23 @@
             </td>
             <td>
                 {{ $article->judul }}
+
             </td>
             <td>
-                {{ $article->status }}
+                @if ($article->status=="warning")
+                <span class="fw-bold text-{{ $article->status }}">Draft</span>
+                @else
+                <span class="fw-bold text-{{ $article->status }}">Published</span>
+                @endif
+                <br>
+                {{ $article->category->nama }}
+                <br>
+                {{ $article->publish }}
             </td>
 
             <td>
                 @can('article-edit')
+                <a href="{{ route('artikels.edit',$article->id) }}" class="btn btn-warning btn-sm">Ubah</a>
                 <button wire:click="edit({{ $article->id }})" class="btn btn-warning btn-sm">Ubah</button>
                 @endcan
                 @can('article-delete')
@@ -56,7 +71,5 @@
     </table>
 </div>
     {{ $articles->links() }}
-
-
 
 </div>

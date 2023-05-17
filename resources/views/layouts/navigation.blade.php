@@ -87,14 +87,14 @@
         </span>
         <div class="multi-level collapse" role="list" id="submenu_blog" aria-expanded="false">
             <ul class="flex-column nav">
-                <li class="nav-item {{ request()->routeIs('add_article') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('add_article') }}">
+                {{-- <li class="nav-item {{ request()->routeIs('articleadd') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('articleadd') }}">
                         <span class="sidebar-icon">
                             <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path><path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path></svg>
                         </span>
                         <span class="sidebar-text">Add Article</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item {{ request()->routeIs('article') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('article') }}">
                         <span class="sidebar-icon">

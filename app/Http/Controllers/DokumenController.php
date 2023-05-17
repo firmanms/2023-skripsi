@@ -18,9 +18,9 @@ class DokumenController extends Controller
     public function index()
     {
         $filter=Auth::user()->id;
-        
+
         $documents = Dokumen::where('user_id',$filter)->latest()->paginate(5);
-    
+
         return view('dokumen.index',compact('documents'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -49,18 +49,18 @@ class DokumenController extends Controller
             'judul' => 'required',
             'image' => 'required|mimes:pdf|max:50000',
         ]);
-  
+
         $input = $request->all();
-  
+
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move(public_path('/images'), $profileImage);
             $input['image'] = "$profileImage";
         }
-    
+
         Dokumen::create($input);
-     
+
         return redirect()->route('document.index')
                         ->with('success','Product created successfully.');
     }
@@ -75,13 +75,13 @@ class DokumenController extends Controller
     {
         $filter=Auth::user()->id;
         $filter2=$document->user_id;
-        //dd($filter2);
+        // dd($document);
          if($filter==$filter2){
              return view('dokumen.show',compact('document'));
          }else{
               abort(404);
          }
-        
+
     }
 
     /**
@@ -100,7 +100,7 @@ class DokumenController extends Controller
          }else{
               abort(404);
          }
-        
+
     }
 
     /**
@@ -117,11 +117,11 @@ class DokumenController extends Controller
             // 'id_user' => 'required',
             'judul' => 'required',
             'image' => 'mimes:jpeg,png,jpg,pdf',
-            
+
         ]);
-  
+
         $input = $request->all();
-  
+
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -130,9 +130,9 @@ class DokumenController extends Controller
         }else{
             unset($input['image']);
         }
-          
+
         $document->update($input);
-    
+
         return redirect()->route('document.index')
                         ->with('success','Product updated successfully');
     }
@@ -146,7 +146,7 @@ class DokumenController extends Controller
     public function destroy(Dokumen $document)
     {
         $document->delete();
-    
+
         return redirect()->route('document.index')
                         ->with('success','Post has been deleted successfully');
     }

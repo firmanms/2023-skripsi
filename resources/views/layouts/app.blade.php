@@ -12,9 +12,11 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/zo1rphqo4c76mpl201c9y7bq5cajhio6g9uaynhxatc3myfk/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script> --}}
 
+    <script src="https://cdn.tiny.cloud/1/zo1rphqo4c76mpl201c9y7bq5cajhio6g9uaynhxatc3myfk/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     @stack('style_date')
@@ -34,6 +36,7 @@
 
     @yield('scripts')
     @livewireScripts
+
     <script>
 
         window.addEventListener('swal:modal', event => {
@@ -59,6 +62,13 @@
             });
         });
          </script>
+             <script>
+                tinymce.init({
+                    selector:'textarea.descriptiona',
+                    width: 900,
+                    height: 300
+                });
+                </script>
     <!-- GetButton.io widget -->
 <script type="text/javascript">
     (function () {

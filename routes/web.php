@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PrintController;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\HomeController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\UserController;
 //     return view('welcome');
 // });
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('homes');
+Route::get('/blog', [App\Http\Controllers\FrontendController::class, 'blog'])->name('blog');
 
 Auth::routes();
 // Auth::routes(['verify' => false]);
@@ -52,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/peserta/config', [\App\Http\Controllers\UserController::class, 'config'])->name('users.report');
     Route::get('/peserta/config2', [\App\Http\Controllers\UserController::class, 'config2'])->name('users.report2');
     //Route::get('/peserta/config', [\App\Http\Controllers\UserController::class, 'config2'])->name('config');
+    //Route::get('/artcle/add', [\App\Http\livewire\Article::class, 'add'])->name('articleadd');
     Route::view('booking', 'booking')->name('booking');
     Route::get('/booking/print/{id}', [PrintController::class, 'prints'])->name('booking.print');
 
@@ -70,9 +73,14 @@ Route::middleware('auth')->group(function () {
     //article
     Route::group(['middleware' => ['permission:article-list']], function () {
         Route::view('article', 'article')->name('article');
+        //edit
+        Route::resource('artikels', FrontendController::class);
+
     });
+    //readarticle
+    Route::get('/artikel/{slug}', [FrontendController::class, 'singleblog'])->name('artikel.read');
     //add article
-    Route::view('add_article', 'add_article')->name('add_article');
+    //Route::view('add_article', 'add_article')->name('add_article');
 
 //Route search
 Route::get('/search', [UserController::class, 'search'])->name('search');

@@ -2,6 +2,31 @@
 
 @section('content')
 <main id="main">
+    <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <h2 data-aos="fade-up" data-aos-delay="400">Selamat Datang Di Website Resmi</h2>
+          <h1 data-aos="fade-up"><b>{{ $banners->judul }}</b></h1>
+            <h3 data-aos="fade-up" data-aos-delay="400">{{ $banners->subjudul }}</h3><br>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
+              <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Selengkapnya</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="{{ url('storage/'.$banners->gambar .'') }}" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -71,6 +96,36 @@
 
       </section>
       <!-- =======End Services Section ======= -->
+    <!-- ======= Recent Blog Posts Section ======= -->
+    <section id="recent-blog-posts" class="recent-blog-posts">
+
+        <div class="container" data-aos="fade-up">
+
+          <header class="section-header">
+            <h2>Blog</h2>
+            <p>Blog</p>
+          </header>
+
+          <div class="row">
+            @foreach($artikels as $artikel)
+            <div class="col-lg-4">
+              <div class="post-box">
+                <div class="post-img"><img src="{{ url('storage/'.$artikel->image .'') }}" class="img-fluid" alt=""></div>
+                <span class="post-date">{{ \Carbon\Carbon::parse($artikel->publish)->format('d M Y') }}</span>
+                <h3 class="post-title">{{$artikel->judul  }}</h3>
+                <a href="{{ route('artikel.read',$artikel->slug) }}" class="readmore stretched-link mt-auto"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          <header class="section-header">
+            {{-- <h2>Blog</h2> --}}
+            <p><a href="{{ route('blog') }}">ALL</a></p>
+          </header>
+
+        </div>
+
+      </section><!-- End Recent Blog Posts Section -->
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
 

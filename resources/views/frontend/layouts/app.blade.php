@@ -45,17 +45,17 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ url('') }}" class="logo d-flex align-items-center">
         <img src="{{ url('storage/'.$profils->logo .'') }}" alt="">
         <span></span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{{ url('') }}">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Service</a></li>
-          <li><a class="nav-link scrollto" href="#services">Blog</a></li>
+          <li><a class="nav-link scrollto" href="#recent-blog-posts">Blog</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="getstarted scrollto" href="login">Login</a></li>
         </ul>
@@ -64,32 +64,6 @@
 
     </div>
   </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center">
-          <h2 data-aos="fade-up" data-aos-delay="400">Selamat Datang Di Website Resmi</h2>
-          <h1 data-aos="fade-up"><b>{{ $banners->judul }}</b></h1>
-            <h3 data-aos="fade-up" data-aos-delay="400">{{ $banners->subjudul }}</h3><br>
-          <div data-aos="fade-up" data-aos-delay="600">
-            <div class="text-center text-lg-start">
-              <a href="#about" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
-                <span>Selengkapnya</span>
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
-          <img src="{{ url('storage/'.$banners->gambar .'') }}" class="img-fluid" alt="">
-        </div>
-      </div>
-    </div>
-
-  </section><!-- End Hero -->
 
   @yield('content')
 

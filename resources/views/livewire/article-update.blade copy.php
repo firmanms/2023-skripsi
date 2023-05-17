@@ -4,6 +4,7 @@
             {{ session('message') }}
         </div>
     @endif
+
     <div class="row">
         <div class="col-12 col-xl-8">
             <div class="col-md-12 mb-3">
@@ -15,9 +16,9 @@
             </div>
             <div class="col-md-12 mb-3 ">
                 <div>
-                    <label for="last_name">Description</label>
+                    <label for="last_name">Description  {{ $description }}</label>
                     <div wire:ignore><textarea wire:model="description" class="description"  name="description"></textarea></div>
-                    {{-- <div wire:ignore><textarea id="description" wire:model="description">{{ $description }}</textarea></div> --}}
+                    {{-- <div wire:ignore><textarea id="description">{{ $description }}</textarea></div> --}}
                     </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
             </div>
 
             <div class="mt-1">
-                <button class="btn btn-success mt-2 animate-up-2" id="my-submit" wire:click="store()">Save</button>
+                <button class="btn btn-success mt-2 animate-up-2"  id="my-submit" wire:click="update()">Update</button>
             </div>
         </div>
     </div>
@@ -80,8 +81,5 @@
     },
 });
 </script>
-
 </div>
-
-
 

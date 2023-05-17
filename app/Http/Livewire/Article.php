@@ -19,11 +19,13 @@ class article extends Component
     public $status;
     public $category_id;
     public $image;
+    public $oldgambar;
     public $publish;
     public $search;
-    public $sortColumnName='id';
-    public $sortDirection='asc';
+    public $sortColumnName='publish';
+    public $sortDirection='desc';
     public $updateMode = false;
+    public $createMode = true;
         use WithPagination;
         protected $paginationTheme='bootstrap';
         protected $queryString = ['search'];
@@ -48,6 +50,7 @@ class article extends Component
     }
     public function mount()
     {
+
 
     }
 
@@ -111,6 +114,13 @@ class article extends Component
         $this->slug = Str::slug($this->title);
     }
     //crud
+    //add
+    public function add()
+    {
+        return view('livewire.article-create',[
+            'categories'=> Kategori::get()
+        ]);
+    }
     public function store()
     {
         $this->validate([
@@ -122,7 +132,7 @@ class article extends Component
             'image' => 'required|image|mimes:jpg,jpeg,png,svg,gif|max:2048'
         ]);
 
-        M_article::create([
+        $store=M_article::create([
             'judul' => $this->judul,
             'slug' => Str::slug($this->judul),
             'description' => $this->description,
@@ -131,10 +141,15 @@ class article extends Component
             'image' => $this->image->store('article','public'),
             'publish' => $this->publish,
         ]);
-        $this->alertSuccess();
-        $this->resetInput();
+        if($store){
+            $this->dispatchBrowserEvent('articleStore');
+            $this->alertSuccess();
+            $this->resetInput();
 
-        session()->flash('success','Article Berhasil Ditambahkan');
+            session()->flash('success','Article Berhasil Ditambahkan');
+
+        }
+
     }
 
     public function edit($id)
@@ -147,7 +162,9 @@ class article extends Component
         $this->status = $record->status;
         $this->category_id = $record->category_id;
         $this->publish = $record->publish;
-        $this->image = $record->image;
+        // $this->image = $record->image;
+        $this->oldgambar = $record->image;
+        $this->createMode= false;
         $this->updateMode = true;
     }
 
@@ -156,15 +173,19 @@ class article extends Component
         $this->validate([
             'selected_id' => 'required|numeric',
             'judul' => 'required',
-            'subjudul' => 'required',
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,svg,gif|max:2048'
+            'description' => 'required',
+            'publish' => 'required',
+            'category_id' => 'required',
+            'status' => 'required',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,svg,gif|max:2048'
         ]);
         // $gambara = $this->post->gambar;
-        if ($this->gambar) {
-            $gambara = $this->gambar->store('gambar','public');
+        if ($this->image) {
+            $gambara = $this->image->store('article','public');
         }else{
             $gambara =  $this->oldgambar;
         }
+        // dd($gambara);
         // $gambar = $this->post->gambar;
         // if ($this->gambar) {
         //     $gambar = $this->gambar->store('banner','public');
@@ -173,8 +194,11 @@ class article extends Component
             $record = M_article::find($this->selected_id);
             $record->update([
             'judul' => $this->judul,
-            'subjudul' => $this->subjudul,
-            'gambar' => $gambara
+            'description' => $this->description,
+            'status'=> $this->status,
+            'category_id'=> $this->category_id,
+            'image' => $gambara,
+            'publish'=> $this->publish
             ]);
             $this->alertWarning();
             $this->resetInput();
