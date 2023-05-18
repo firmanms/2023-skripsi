@@ -52,7 +52,7 @@
             <td>
                 @can('article-edit')
                 <a href="{{ route('artikels.edit',$article->id) }}" class="btn btn-warning btn-sm">Ubah</a>
-                <button wire:click="edit({{ $article->id }})" class="btn btn-warning btn-sm">Ubah</button>
+                {{-- <button wire:click="edit({{ $article->id }})" class="btn btn-warning btn-sm">Ubah</button> --}}
                 @endcan
                 @can('article-delete')
                 <button wire:click="destroy({{ $article->id }})" class="btn btn-danger btn-sm">Hapus</button>
