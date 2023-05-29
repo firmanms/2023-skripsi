@@ -77,7 +77,7 @@
                 <i class="ri-discuss-line icon"></i>
                 <h3>SWAB</h3>
                 <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-                {{-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> --}}
+                <a href="{{ route('login') }}" class="read-more"><span>Login</span> <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
 
@@ -86,7 +86,7 @@
                 <i class="ri-discuss-line icon"></i>
                 <h3>Consultation</h3>
                 <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-                {{-- <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a> --}}
+                <a href="{{ route('login') }}" class="read-more"><span>Login</span> <i class="bi bi-arrow-right"></i></a>
               </div>
             </div>
 
