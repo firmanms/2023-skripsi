@@ -66,7 +66,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'nik' => $data['nik'],
             'dateofbirth' => $data['dateofbirth'],
@@ -76,6 +76,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->assignRole('pasien');
+        return $user;
     }
     public function generateUniqueCode()
     {
