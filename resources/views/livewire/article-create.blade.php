@@ -8,6 +8,7 @@
         <div class="col-12 col-xl-8">
             <div class="col-md-12 mb-3">
                 <div>
+                    <input type="hidden" class="form-control input-sm @error ('user_id') is-invalid @enderror " value="{{ Auth::user()->id }}" placeholder="" wire:model="user_id">
                     <label for="first_name">Title</label>
                     <input type="text" class="form-control input-sm @error ('judul') is-invalid @enderror " placeholder="" wire:model="judul">
                     {{-- <input type="date" class="form-control"  placeholder="2023-02-31" id="datepicker" name="dateofbirth" required> --}}

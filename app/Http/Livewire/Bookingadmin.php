@@ -30,8 +30,16 @@ class Bookingadmin extends Component
 
     public function render()
     {
+        $cari=$this->search;
             return view('livewire.bookingadmin',[
-                'bookings' => M_booking::where('date_booking','like','%'.$this->search.'%')->orwhere('jenis','like','%'.$this->search.'%')->orwhere('coderandom','like','%'.$this->search.'%')->orderBy('date_booking','desc')->paginate(10)
+                'bookings' => M_booking::join('users','users.id','=','bookings.user_id')
+                            ->where('date_booking','like','%'.$cari.'%')
+                            ->orwhere('jenis','like','%'.$this->search.'%')
+                            ->orwhere('coderandom','like','%'.$this->search.'%')
+                            ->orwhere('users.name','like','%'.$this->search.'%')
+                            ->orwhere('users.nik','like','%'.$this->search.'%')
+                            ->orderBy('date_booking','desc')
+                            ->paginate(10)
             ]);
     }
     private function resetInput()

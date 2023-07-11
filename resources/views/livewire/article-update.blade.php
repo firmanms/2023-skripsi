@@ -16,6 +16,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div>
                                             <label for="first_name">Title</label>
+                                            <input type="hidden" name="user_id" class="form-control input-sm @error ('user_id') is-invalid @enderror " placeholder="" value="{{ $artikel->user_id }}">
                                             <input type="text" name="judul" class="form-control input-sm @error ('judul') is-invalid @enderror " placeholder="" value="{{ $artikel->judul }}">
                                             {{-- <input type="date" class="form-control"  placeholder="2023-02-31" id="datepicker" name="dateofbirth" required> --}}
                                         </div>

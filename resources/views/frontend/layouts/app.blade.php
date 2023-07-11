@@ -30,6 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('tema/assets/css/style.css') }}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
   <!-- =======================================================
   * Template Name: FlexStart - v1.12.0
@@ -55,9 +56,25 @@
           <li><a class="nav-link scrollto active" href="{{ url('') }}">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Service</a></li>
+          <li><a class="nav-link scrollto" href="#faq">F.A.Q</a></li>
           <li><a class="nav-link scrollto" href="#recent-blog-posts">Blog</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="getstarted scrollto" href="login">Login</a></li>
+          @if (Route::has('login'))
+                    @auth
+                    <li><a class="getstarted scrollto" href="{{ url('/home') }}">Panel</a></li>
+                        {{-- <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a> --}}
+                    @else
+                    <li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
+                        {{-- <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a> --}}
+
+                        @if (Route::has('register'))
+
+                            {{-- <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a> --}}
+                        @endif
+                    @endauth
+
+            @endif
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

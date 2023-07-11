@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Kategori;
 use App\Models\M_article;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -13,6 +14,7 @@ use Illuminate\Support\Str;
 class article extends Component
 {
     use WithFileUploads;
+    public $user_id;
     public $judul;
     public $slug;
     public $description;
@@ -50,7 +52,7 @@ class article extends Component
     }
     public function mount()
     {
-
+        $this->user_id = Auth::user()->id;
 
     }
 
@@ -124,6 +126,7 @@ class article extends Component
     public function store()
     {
         $this->validate([
+            'user_id' => '',
             'judul' => 'required|string',
             'description' => 'required',
             'publish' => 'required',
@@ -133,6 +136,7 @@ class article extends Component
         ]);
 
         $store=M_article::create([
+            'user_id' => $this->user_id,
             'judul' => $this->judul,
             'slug' => Str::slug($this->judul),
             'description' => $this->description,

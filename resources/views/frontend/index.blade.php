@@ -96,6 +96,47 @@
 
       </section>
       <!-- =======End Services Section ======= -->
+    <!-- ======= F.A.Q Section ======= -->
+    <section id="faq" class="faq">
+
+        <div class="container" data-aos="fade-up">
+
+          <header class="section-header">
+            <h2>F.A.Q</h2>
+            <p>Frequently Asked Questions</p>
+          </header>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- F.A.Q List 1-->
+              <div class="accordion accordion-flush" id="faqlist1">
+                @foreach($faqs as $faq)
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{ $faq->id }}">
+                      {{ $faq->value }}
+                    </button>
+                  </h2>
+                  @foreach ($faq->child as $val)
+                  <div id="faq-content-{{ $val->parent_id }}" class="accordion-collapse collapse" data-bs-parent="#faqlist1">
+                    <div class="accordion-body">
+                      {{ $val->value }}
+                    </div>
+                  </div>
+                  @endforeach
+                </div>
+                @endforeach
+
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section><!-- End F.A.Q Section -->
+
     <!-- ======= Recent Blog Posts Section ======= -->
     <section id="recent-blog-posts" class="recent-blog-posts">
 

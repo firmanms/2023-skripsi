@@ -47,8 +47,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function country()
-    {
-        return $this->belongsTo('App\Models\Country','country_id');
+    public function posts(){
+        return $this->hasMany(M_article::class,'user_id','id');
+    }
+    public function komentarnya () {
+        return $this->hasMany(M_komentar::class,'user_id','id');
+    }
+    public function booking () {
+        return $this->hasMany(M_booking::class,'user_id','id');
     }
 }

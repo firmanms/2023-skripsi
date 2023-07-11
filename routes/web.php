@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\KomentarfrontController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PrintController;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\HomeController;
@@ -77,10 +79,20 @@ Route::middleware('auth')->group(function () {
         Route::resource('artikels', FrontendController::class);
 
     });
-    //readarticle
-    Route::get('/artikel/{slug}', [FrontendController::class, 'singleblog'])->name('artikel.read');
-    //add article
-    //Route::view('add_article', 'add_article')->name('add_article');
+
+    //submit komentar
+    Route::post('/submitkomentar', [KomentarfrontController::class,'comment']);
+
+    // Route::post('/like', [LikeController::class,'store'])->name('like.post');
+    Route::resource('/likedislike',LikeController::class);
+    //category blog
+    Route::group(['middleware' => ['permission:faq-list']], function () {
+        Route::view('faq', 'faq')->name('faq');
+    });
+    //komentarbackend
+    Route::group(['middleware' => ['permission:komentar-list']], function () {
+        Route::view('komentar', 'komentar')->name('komentar');
+    });
 
 //Route search
 Route::get('/search', [UserController::class, 'search'])->name('search');
@@ -97,3 +109,5 @@ Route::get('/symlink', function () {
     Artisan::call('storage:link');
 });
  Auth::routes(['verify' => true]);
+ //readarticle
+ Route::get('/artikel/{slug}', [FrontendController::class, 'singleblog'])->name('artikel.read');
